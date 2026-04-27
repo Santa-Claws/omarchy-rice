@@ -126,7 +126,7 @@
       "transition-duration": 600,
       "children-class": "tray-group-item"
     },
-    "modules": ["custom/expand-icon", "tray"]
+    "modules": ["custom/expand-icon", "tray", "custom/tailscale", "custom/warp", "custom/home-network", "custom/idle-drawer"]
   },
   "custom/expand-icon": {
     "format": "",
@@ -170,5 +170,32 @@
   "tray": {
     "icon-size": 12,
     "spacing": 17
+  },
+
+  "custom/tailscale": {
+    "exec": "$HOME/.config/waybar/scripts/tailscale-status.sh",
+    "return-type": "json",
+    "interval": 5,
+    "signal": 11,
+    "on-click": "$HOME/.config/waybar/scripts/tailscale-toggle.sh"
+  },
+  "custom/warp": {
+    "exec": "$HOME/.config/waybar/scripts/warp-status.sh",
+    "return-type": "json",
+    "interval": 5,
+    "signal": 12,
+    "on-click": "$HOME/.config/waybar/scripts/warp-toggle.sh"
+  },
+  "custom/home-network": {
+    "exec": "$HOME/.config/waybar/scripts/home-network.sh",
+    "return-type": "json",
+    "interval": 15
+  },
+  "custom/idle-drawer": {
+    "exec": "$HOME/.config/waybar/scripts/idle-status.sh",
+    "return-type": "json",
+    "interval": 30,
+    "signal": 9,
+    "on-click": "omarchy-toggle-idle"
   }
 }

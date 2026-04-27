@@ -98,3 +98,16 @@ tooltip {
 #custom-voxtype.recording {
   color: #a55555;
 }
+
+#custom-tailscale,
+#custom-warp,
+#custom-home-network,
+#custom-idle-drawer {
+  min-width: 12px;
+  margin: 0 7.5px;
+}
+
+#custom-tailscale.active,
+#custom-warp.active {
+  color: #5f9ea0;
+}
