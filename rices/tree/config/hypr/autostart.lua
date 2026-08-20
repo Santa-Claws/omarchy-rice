@@ -8,6 +8,7 @@ hl.on("hyprland.start", function()
     "flatpak run com.discordapp.Discord --force-device-scale-factor=0.7",
     { workspace = "3 silent" }
   )
+  hl.exec_cmd("omarchy-scaling-tui --apply-discord-zoom 0.7")
   hl.exec_cmd(
     "uwsm-app -- spotify --force-device-scale-factor=0.7",
     { workspace = "4 silent" }
