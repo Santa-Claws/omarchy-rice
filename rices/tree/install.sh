@@ -185,6 +185,7 @@ fi
 echo "==> Restoring configuration files"
 install_tree "$RICE_DIR/config" "$TARGET_HOME/.config"
 install_tree "$RICE_DIR/local" "$TARGET_HOME/.local"
+install_tree "$RICE_DIR/var" "$TARGET_HOME/.var"
 install_tree "$RICE_DIR/omarchy/themes" "$TARGET_HOME/.config/omarchy/themes"
 install_tree "$RICE_DIR/omarchy/backgrounds" "$TARGET_HOME/.config/omarchy/backgrounds"
 

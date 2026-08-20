@@ -53,6 +53,7 @@ compare_tree() {
 
 compare_tree "$RICE_DIR/config" "$TARGET_HOME/.config"
 compare_tree "$RICE_DIR/local" "$TARGET_HOME/.local"
+compare_tree "$RICE_DIR/var" "$TARGET_HOME/.var"
 compare_tree "$RICE_DIR/omarchy/themes" "$TARGET_HOME/.config/omarchy/themes"
 compare_tree "$RICE_DIR/omarchy/backgrounds" "$TARGET_HOME/.config/omarchy/backgrounds"
 
@@ -93,6 +94,13 @@ if ! $FILES_ONLY; then
     pass "OrcaSlicer scale is 0.7"
   else
     fail "OrcaSlicer scale is not 0.7"
+  fi
+
+  if grep -qx -- '--force-device-scale-factor=0.7' \
+      "$TARGET_HOME/.var/app/com.discordapp.Discord/config/discord-flags.conf" 2>/dev/null; then
+    pass "Discord wrapper scale is 0.7"
+  else
+    fail "Discord wrapper scale is not 0.7"
   fi
 
   if hyprctl version >/dev/null 2>&1; then

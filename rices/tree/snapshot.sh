@@ -39,6 +39,8 @@ copy_file "$HOME/.config/xdg-terminals.list" "$RICE_DIR/config/xdg-terminals.lis
 copy_file "$HOME/.config/omarchy-scaling-tui.json" "$RICE_DIR/config/omarchy-scaling-tui.json"
 copy_file "$HOME/.config/omarchy/current/theme/waybar.css" \
   "$RICE_DIR/config/omarchy/current/theme/waybar.css"
+copy_file "$HOME/.var/app/com.discordapp.Discord/config/discord-flags.conf" \
+  "$RICE_DIR/var/app/com.discordapp.Discord/config/discord-flags.conf"
 
 copy_file "$HOME/.local/bin/omarchy-toggle-waybar" \
   "$RICE_DIR/local/bin/omarchy-toggle-waybar"
@@ -59,7 +61,7 @@ for file in "${desktop_files[@]}"; do
 done
 
 if rg -n -i '(api[_-]?key|access[_-]?token|authorization)[[:space:]]*[:=][[:space:]]*[^[:space:]]{8}' \
-    "$RICE_DIR/config" "$RICE_DIR/local" "$RICE_DIR/omarchy"; then
+    "$RICE_DIR/config" "$RICE_DIR/local" "$RICE_DIR/var" "$RICE_DIR/omarchy"; then
   echo "Possible secret detected; review before committing." >&2
   exit 1
 fi
