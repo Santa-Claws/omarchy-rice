@@ -1,0 +1,19 @@
+# Required by the restored desktop, Waybar modules, and helper tools.
+alacritty
+chromium
+desktop-file-utils
+firefox
+flatpak
+git
+jq
+libnotify
+pamixer
+playerctl
+python-pipx
+socat
+spotify
+tailscale
+ttf-jetbrains-mono-nerd-basic
+waybar
+wl-clipboard
+wtype

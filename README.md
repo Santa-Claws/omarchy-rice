@@ -1,51 +1,37 @@
 # omarchy-rice
 
-A collection of rices for [Omarchy](https://omarchy.com) — the opinionated Hyprland setup.
+Reproducible Omarchy desktop configurations. The `tree` rice is a complete snapshot of the working Quattro setup, with a from-clean-install bootstrap and an exact file verifier.
 
-## Rices
-
-| Rice | Preview | Description |
-|---|---|---|
-| [tree](rices/tree/) | ![tree](rices/tree/preview.png) | Monochrome dark charcoal, 85% opacity terminals, ML4W keybindings |
-
-## Installing a rice
-
-Each rice has its own `install.sh` that backs up your existing files before applying:
+## Restore from a clean Omarchy install
 
 ```bash
 git clone https://github.com/Santa-Claws/omarchy-rice.git
-cd omarchy-rice/rices/<rice-name>
-chmod +x install.sh
+cd omarchy-rice/rices/tree
 ./install.sh
 ```
 
-Requires [Omarchy](https://omarchy.com) to already be installed.
+The installer:
 
-## Adding a rice
+- installs required Pacman/AUR packages and Flatpaks;
+- installs pinned versions of `hypr-typr` and `omarchy-scaling-tui`;
+- backs up every overwritten file;
+- restores Hyprland Lua configuration, Waybar, terminal configuration, the Tree theme, wallpaper, application scaling, defaults, helper scripts, and autostart;
+- removes Omarchy's duplicate Discord web-app launcher;
+- hides Quattro's bar, starts Waybar, applies the theme, and validates Hyprland.
 
-1. Fork this repo
-2. Create `rices/<your-rice-name>/` following the structure below
-3. Add a `preview.png`, `README.md`, and `install.sh`
-4. Open a PR
+This is a desktop/rice backup, not a disk image. It intentionally excludes credentials, application profiles, browser data, Discord data, caches, VPN identity, and third-party application binaries.
 
-### Rice structure
+See [rices/tree/README.md](rices/tree/README.md) for the exact contents, recovery options, and verification commands.
 
+## Repository layout
+
+```text
+rices/tree/
+├── config/             # Restored to ~/.config
+├── local/              # Restored to ~/.local
+├── omarchy/            # Custom themes and backgrounds
+├── packages/           # Pacman, AUR, Flatpak, and pinned Git dependencies
+├── install.sh          # Idempotent bootstrap with backups
+├── verify.sh           # Exact file and runtime checks
+└── snapshot.sh         # Refresh the whitelist from the live desktop
 ```
-rices/<name>/
-├── README.md                  # Description + keybindings table
-├── preview.png                # Screenshot for the table above
-├── install.sh                 # Installer with backup logic
-├── config/
-│   ├── hypr/                  # ~/.config/hypr/ overrides
-│   ├── waybar/                # ~/.config/waybar/ overrides
-│   ├── mimeapps.list          # Default apps
-│   └── xdg-terminals.list    # Terminal preference
-├── local/
-│   └── share/
-│       └── applications/      # ~/.local/share/applications/ overrides
-└── omarchy/
-    ├── themes/<name>/         # ~/.config/omarchy/themes/<name>/
-    └── backgrounds/           # ~/.config/omarchy/backgrounds/ (merged)
-```
-
-The `install.sh` should back up any files it overwrites and call `omarchy-theme-set <name>` + `hyprctl reload` at the end.

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+pkill -x waybar 2>/dev/null || true
+setsid uwsm-app -- waybar >/dev/null 2>&1 &

@@ -2,7 +2,7 @@
 Type=Application
 Name=Spotify
 GenericName=Music Player
-Exec=spotify --force-device-scale-factor=0.7 --uri=%u
+Exec=spotify --uri=%u --force-device-scale-factor=0.7
 Icon=spotify
 Terminal=false
 MimeType=x-scheme-handler/spotify;

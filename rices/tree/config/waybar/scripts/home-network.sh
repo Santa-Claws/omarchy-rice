@@ -1,22 +1,19 @@
 #!/bin/bash
-# Replace these with your own machine IPs
-MACHINE1_IP="192.168.1.100"
-MACHINE2_IP="192.168.1.101"
-MACHINE1_NAME="machine1"
-MACHINE2_NAME="machine2"
+THELITTLEONE_IP="192.168.254.161"
+NESTLECRUNCH_IP="192.168.254.84"
 
-ping -c1 -W1 "$MACHINE1_IP" &>/dev/null
-MACHINE1_OK=$?
+ping -c1 -W1 "$THELITTLEONE_IP" &>/dev/null
+THELITTLEONE_OK=$?
 
-ping -c1 -W1 "$MACHINE2_IP" &>/dev/null
-MACHINE2_OK=$?
+ping -c1 -W1 "$NESTLECRUNCH_IP" &>/dev/null
+NESTLECRUNCH_OK=$?
 
-MACHINE1_STATUS=$([[ $MACHINE1_OK -eq 0 ]] && echo "✓" || echo "✗")
-MACHINE2_STATUS=$([[ $MACHINE2_OK -eq 0 ]] && echo "✓" || echo "✗")
+THELITTLEONE_STATUS=$([[ $THELITTLEONE_OK -eq 0 ]] && echo "✓" || echo "✗")
+NESTLECRUNCH_STATUS=$([[ $NESTLECRUNCH_OK -eq 0 ]] && echo "✓" || echo "✗")
 
-TOOLTIP="${MACHINE1_NAME}: ${MACHINE1_STATUS}\\n${MACHINE2_NAME}: ${MACHINE2_STATUS}"
+TOOLTIP="thelittleone: ${THELITTLEONE_STATUS}\\nnestlecrunch: ${NESTLECRUNCH_STATUS}"
 
-if [[ $MACHINE1_OK -eq 0 ]] || [[ $MACHINE2_OK -eq 0 ]]; then
+if [[ $THELITTLEONE_OK -eq 0 ]] || [[ $NESTLECRUNCH_OK -eq 0 ]]; then
     echo "{\"text\": \"󰋘\", \"tooltip\": \"${TOOLTIP}\", \"class\": \"active\"}"
 else
     echo "{\"text\": \"󰅙\", \"tooltip\": \"${TOOLTIP}\", \"class\": \"\"}"

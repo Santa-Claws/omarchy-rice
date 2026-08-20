@@ -1,0 +1,3 @@
+# Optional applications represented by the restored launchers/widgets.
+betaflight-configurator-bin
+cloudflare-warp-bin
