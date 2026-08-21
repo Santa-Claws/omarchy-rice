@@ -1,5 +1,14 @@
 -- Change the default Omarchy look'n'feel.
 
+-- Never let an application activation request pull focus or switch
+-- workspaces. This keeps background Codex terminals passive on completion;
+-- explicit clicks and workspace keybindings still focus them normally.
+hl.config({
+  misc = {
+    focus_on_activate = false,
+  },
+})
+
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#general
 -- hl.config({
 --   general = {

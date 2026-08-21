@@ -16,7 +16,7 @@ A monochrome charcoal Omarchy Quattro setup restored from the live desktop on Au
 | Terminal | Alacritty preferred, JetBrains Mono Nerd Font at 6.5; matching Foot/Kitty/Ghostty configs |
 | Waybar | Exact 26px layout, 12-hour clock, weather, tray drawer, VPN, home-network and idle status |
 | Notifications | All notification cards at 50% width, height, typography, icon, and padding |
-| Codex completion | Success/failure desktop notification without terminal urgency or workspace switching; brief Git commit handoff |
+| Codex completion | Success/failure desktop notification; compositor blocks completion activation requests from switching workspaces; brief Git commit handoff |
 | Autostart | Waybar; Firefox ws1; two terminals ws2; Discord ws3; Spotify ws4 |
 | Scaling | Discord (launcher, wrapper, and effective 70% UI zoom on autostart), Spotify, Chromium and Betaflight at 0.7; OrcaSlicer `GDK_DPI_SCALE=0.7` |
 | Defaults | Firefox browser, Alacritty terminal, existing MIME preferences |

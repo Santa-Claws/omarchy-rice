@@ -109,6 +109,12 @@ if ! $FILES_ONLY; then
     [[ -z $config_errors ]] \
       && pass "Hyprland configuration has no errors" \
       || fail "Hyprland configuration errors: $config_errors"
+
+    if hyprctl getoption misc:focus_on_activate 2>/dev/null | grep -q '^bool: false$'; then
+      pass "application activation cannot steal focus"
+    else
+      fail "application activation can steal focus"
+    fi
   fi
 
   [[ $(omarchy theme current 2>/dev/null | tr '[:upper:]' '[:lower:]') == tree ]] \
