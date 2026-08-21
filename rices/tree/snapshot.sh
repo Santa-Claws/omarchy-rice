@@ -33,10 +33,13 @@ copy_directory "$HOME/.config/foot" "$RICE_DIR/config/foot"
 copy_directory "$HOME/.config/kitty" "$RICE_DIR/config/kitty"
 copy_directory "$HOME/.config/ghostty" "$RICE_DIR/config/ghostty"
 copy_directory "$HOME/.config/omarchy/themes/tree" "$RICE_DIR/omarchy/themes/tree"
+copy_directory "$HOME/.config/omarchy/plugins/tmac.notifications" \
+  "$RICE_DIR/config/omarchy/plugins/tmac.notifications"
 
 copy_file "$HOME/.config/mimeapps.list" "$RICE_DIR/config/mimeapps.list"
 copy_file "$HOME/.config/xdg-terminals.list" "$RICE_DIR/config/xdg-terminals.list"
 copy_file "$HOME/.config/omarchy-scaling-tui.json" "$RICE_DIR/config/omarchy-scaling-tui.json"
+copy_file "$HOME/.config/omarchy/shell.json" "$RICE_DIR/config/omarchy/shell.json"
 copy_file "$HOME/.config/omarchy/current/theme/waybar.css" \
   "$RICE_DIR/config/omarchy/current/theme/waybar.css"
 copy_file "$HOME/.var/app/com.discordapp.Discord/config/discord-flags.conf" \
