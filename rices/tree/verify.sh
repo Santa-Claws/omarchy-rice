@@ -51,6 +51,7 @@ compare_tree() {
   done < <(find "$source_root" -type f -print0)
 }
 
+compare_tree "$RICE_DIR/codex" "$TARGET_HOME/.codex"
 compare_tree "$RICE_DIR/config" "$TARGET_HOME/.config"
 compare_tree "$RICE_DIR/local" "$TARGET_HOME/.local"
 compare_tree "$RICE_DIR/var" "$TARGET_HOME/.var"

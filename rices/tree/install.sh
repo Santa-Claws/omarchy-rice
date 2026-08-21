@@ -183,6 +183,7 @@ if $INSTALL_PACKAGES; then
 fi
 
 echo "==> Restoring configuration files"
+install_tree "$RICE_DIR/codex" "$TARGET_HOME/.codex"
 install_tree "$RICE_DIR/config" "$TARGET_HOME/.config"
 install_tree "$RICE_DIR/local" "$TARGET_HOME/.local"
 install_tree "$RICE_DIR/var" "$TARGET_HOME/.var"

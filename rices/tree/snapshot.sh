@@ -44,7 +44,11 @@ copy_file "$HOME/.config/omarchy/current/theme/waybar.css" \
   "$RICE_DIR/config/omarchy/current/theme/waybar.css"
 copy_file "$HOME/.var/app/com.discordapp.Discord/config/discord-flags.conf" \
   "$RICE_DIR/var/app/com.discordapp.Discord/config/discord-flags.conf"
+copy_file "$HOME/.codex/AGENTS.md" "$RICE_DIR/codex/AGENTS.md"
+copy_file "$HOME/.codex/config.toml" "$RICE_DIR/codex/config.toml"
 
+copy_file "$HOME/.local/bin/codex-completion-notify" \
+  "$RICE_DIR/local/bin/codex-completion-notify"
 copy_file "$HOME/.local/bin/omarchy-toggle-waybar" \
   "$RICE_DIR/local/bin/omarchy-toggle-waybar"
 copy_file "$HOME/.local/bin/omarchy-restart-waybar" \
@@ -64,7 +68,7 @@ for file in "${desktop_files[@]}"; do
 done
 
 if rg -n -i '(api[_-]?key|access[_-]?token|authorization)[[:space:]]*[:=][[:space:]]*[^[:space:]]{8}' \
-    "$RICE_DIR/config" "$RICE_DIR/local" "$RICE_DIR/var" "$RICE_DIR/omarchy"; then
+    "$RICE_DIR/codex" "$RICE_DIR/config" "$RICE_DIR/local" "$RICE_DIR/var" "$RICE_DIR/omarchy"; then
   echo "Possible secret detected; review before committing." >&2
   exit 1
 fi

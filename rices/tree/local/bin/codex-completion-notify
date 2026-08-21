@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Codex passes one JSON object to this hook. The global AGENTS.md requires a
+# machine-readable result sentence in the final response. Only that result is
+# used here, so prompt and response contents never appear on a shared screen.
+payload=${1:-}
+[[ -n $payload ]] || exit 0
+
+event_type=$(jq -r '.type // empty' <<<"$payload" 2>/dev/null) || exit 0
+[[ $event_type == "agent-turn-complete" ]] || exit 0
+
+assistant_message=$(
+  jq -r '."last-assistant-message" // .last_assistant_message // empty' \
+    <<<"$payload" 2>/dev/null
+) || assistant_message=
+
+if grep -Fq 'Task result: Success.' <<<"$assistant_message"; then
+  result=Success
+  description="Codex completed the task."
+  glyph='󰄬'
+else
+  result=Failure
+  description="Codex could not complete the task."
+  glyph='󰅖'
+fi
+
+omarchy-notification-send \
+  --app-name Codex \
+  --glyph "$glyph" \
+  --urgency normal \
+  "$result" \
+  "$description"
