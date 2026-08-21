@@ -15,7 +15,7 @@ The installer:
 - installs required Pacman/AUR packages and Flatpaks;
 - installs pinned versions of `hypr-typr` and `omarchy-scaling-tui`;
 - backs up every overwritten file;
-- restores Hyprland Lua configuration, Waybar, Discord-sized notifications, terminal configuration, the Tree theme, wallpaper, application scaling, defaults, helper scripts, and autostart;
+- restores Hyprland Lua configuration, Waybar, compact half-size notifications, terminal configuration, the Tree theme, wallpaper, application scaling, defaults, helper scripts, and autostart;
 - removes Omarchy's duplicate Discord web-app launcher;
 - hides Quattro's bar, starts Waybar, applies the theme, and validates Hyprland.
 

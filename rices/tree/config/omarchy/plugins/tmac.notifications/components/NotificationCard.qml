@@ -45,8 +45,7 @@ BorderSurface {
   readonly property bool collapseRedundantIcon: singleLineToast && !hasGlyph && summaryStartsWithGlyph
   readonly property string sanitizedBody: sanitizeBody(body)
   readonly property string styledBody: sanitizedBody.replace(/\r\n|\r|\n/g, "<br/>")
-  readonly property bool discordNotification: String(app).toLowerCase().indexOf("discord") >= 0
-  readonly property real sizeScale: discordNotification ? 0.5 : 1.0
+  readonly property real sizeScale: 0.5
 
   readonly property color dimColor: Qt.darker(Color.notifications.text, 1.4)
   readonly property color bodyColor: Qt.darker(Color.notifications.text, 1.15)
