@@ -1,5 +1,5 @@
 model = "gpt-5.6-sol"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 notify = ["codex-completion-notify"]
 [projects."/home/tmac"]
 trust_level = "trusted"

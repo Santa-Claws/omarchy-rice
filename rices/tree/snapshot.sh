@@ -38,6 +38,7 @@ copy_directory "$HOME/.config/omarchy/plugins/tmac.notifications" \
 
 copy_file "$HOME/.config/mimeapps.list" "$RICE_DIR/config/mimeapps.list"
 copy_file "$HOME/.config/xdg-terminals.list" "$RICE_DIR/config/xdg-terminals.list"
+copy_file "$HOME/.config/chromium-flags.conf" "$RICE_DIR/config/chromium-flags.conf"
 copy_file "$HOME/.config/omarchy-scaling-tui.json" "$RICE_DIR/config/omarchy-scaling-tui.json"
 copy_file "$HOME/.config/omarchy/shell.json" "$RICE_DIR/config/omarchy/shell.json"
 copy_file "$HOME/.config/omarchy/current/theme/waybar.css" \

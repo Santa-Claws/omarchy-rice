@@ -104,6 +104,15 @@ if ! $FILES_ONLY; then
     fail "Discord wrapper scale is not 0.7"
   fi
 
+  if grep -qx -- '--force-device-scale-factor=0.7' \
+      "$TARGET_HOME/.config/chromium-flags.conf" 2>/dev/null \
+      && grep -q '^Exec=/usr/bin/chromium --force-device-scale-factor=0.7 ' \
+        "$TARGET_HOME/.local/share/applications/chromium.desktop" 2>/dev/null; then
+    pass "Chromium scale is 0.7 on every launch path"
+  else
+    fail "Chromium scale is not 0.7 on every launch path"
+  fi
+
   if hyprctl version >/dev/null 2>&1; then
     config_errors=$(hyprctl configerrors)
     [[ -z $config_errors ]] \
