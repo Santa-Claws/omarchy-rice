@@ -28,6 +28,6 @@ require("default.hypr.toggles")
 -- Add any other personal Hyprland configuration below.
 -- o.window("qemu", { workspace = "5" })
 
--- Half-size cursor (Omarchy defaults to 24).
-hl.env("XCURSOR_SIZE", "12")
-hl.env("HYPRCURSOR_SIZE", "12")
+-- Keep the XWayland cursor proportional to Chromium's 0.7 UI scale.
+hl.env("XCURSOR_SIZE", "8")
+hl.env("HYPRCURSOR_SIZE", "8")

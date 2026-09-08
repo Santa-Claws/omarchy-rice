@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-# Chromium is intentionally run through XWayland for visible 0.7 UI scaling.
-# Keep its cursor proportional to the already half-size desktop cursor.
-export XCURSOR_SIZE=8
-export HYPRCURSOR_SIZE=8
-
-exec /usr/bin/chromium "$@"

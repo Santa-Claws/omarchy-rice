@@ -54,8 +54,6 @@ copy_file "$HOME/.local/bin/omarchy-toggle-waybar" \
   "$RICE_DIR/local/bin/omarchy-toggle-waybar"
 copy_file "$HOME/.local/bin/omarchy-restart-waybar" \
   "$RICE_DIR/local/bin/omarchy-restart-waybar"
-copy_file "$HOME/.local/bin/chromium" \
-  "$RICE_DIR/local/bin/chromium"
 
 desktop_files=(
   betaflight-configurator.desktop
