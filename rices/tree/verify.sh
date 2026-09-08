@@ -106,7 +106,7 @@ if ! $FILES_ONLY; then
 
   if grep -qx -- '--force-device-scale-factor=0.7' \
       "$TARGET_HOME/.config/chromium-flags.conf" 2>/dev/null \
-      && grep -q '^Exec=/usr/bin/chromium --force-device-scale-factor=0.7 ' \
+      && grep -q '^Exec=/home/tmac/.local/bin/chromium --force-device-scale-factor=0.7 ' \
         "$TARGET_HOME/.local/share/applications/chromium.desktop" 2>/dev/null; then
     pass "Chromium scale is 0.7 on every launch path"
   else
