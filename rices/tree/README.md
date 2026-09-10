@@ -22,7 +22,7 @@ A monochrome charcoal Omarchy Quattro setup restored from the live desktop on Au
 | Defaults | Firefox browser, Alacritty terminal, existing MIME preferences |
 | Helpers | Waybar toggle/restart scripts, `hypr-typr`, Quattro-compatible indicator scripts |
 
-Waybar's home-network widget includes the original private LAN hosts `thelittleone` (`192.168.254.161`) and `nestlecrunch` (`192.168.254.84`). Edit `config/waybar/scripts/home-network.sh` before installing elsewhere if those names or addresses differ.
+Waybar's home-network widget checks the private LAN hosts `thelittleone` (`192.168.254.161`), `nestlecrunch` (`192.168.254.84`), `alfred1` (`192.168.254.200`), `alfred2` (`192.168.254.210`), `alfred3` (`192.168.254.220`), and `alfred4` (`192.168.254.230`). Edit `config/waybar/scripts/home-network.sh` before installing elsewhere if those names or addresses differ.
 
 ## Restore from a clean install
 
