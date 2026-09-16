@@ -15,7 +15,7 @@ hl.unbind("SUPER + SHIFT + M")
 o.bind(
   "SUPER + SHIFT + M",
   "Music",
-  "omarchy-launch-or-focus spotify \"uwsm-app -- spotify --force-device-scale-factor=0.7\""
+  "omarchy-launch-or-focus spotify \"uwsm-app -- env XCURSOR_SIZE=8 HYPRCURSOR_SIZE=8 spotify --force-device-scale-factor=0.7\""
 )
 
 -- Close window: ML4W SUPER+Q (Omarchy default was SUPER+W).
