@@ -29,5 +29,5 @@ require("default.hypr.toggles")
 -- o.window("qemu", { workspace = "5" })
 
 -- Keep the XWayland cursor proportional to Chromium's 0.7 UI scale.
-hl.env("XCURSOR_SIZE", "6")
-hl.env("HYPRCURSOR_SIZE", "6")
+hl.env("XCURSOR_SIZE", "4")
+hl.env("HYPRCURSOR_SIZE", "4")
