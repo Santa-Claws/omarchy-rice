@@ -19,7 +19,7 @@ copy_directory() {
 }
 
 hypr_files=(
-  hyprland.lua monitors.lua input.lua bindings.lua looknfeel.lua autostart.lua
+  hyprland.conf hyprland.lua monitors.lua input.lua bindings.lua looknfeel.lua autostart.lua
   hypridle.conf hyprlock.conf hyprsunset.conf xdph.conf
 )
 
