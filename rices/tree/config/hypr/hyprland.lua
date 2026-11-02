@@ -28,8 +28,8 @@ require("default.hypr.toggles")
 -- Add any other personal Hyprland configuration below.
 -- o.window("qemu", { workspace = "5" })
 
--- Use a real 12px cursor theme; Adwaita's stock theme falls back to 24px.
-hl.env("XCURSOR_THEME", "Adwaita-12")
-hl.env("HYPRCURSOR_THEME", "Adwaita-12")
-hl.env("XCURSOR_SIZE", "12")
-hl.env("HYPRCURSOR_SIZE", "12")
+-- Keep XWayland cursors at the known-good compact session size.
+hl.env("XCURSOR_THEME", "default")
+hl.env("HYPRCURSOR_THEME", "default")
+hl.env("XCURSOR_SIZE", "8")
+hl.env("HYPRCURSOR_SIZE", "8")
