@@ -1,0 +1,4 @@
+[Icon Theme]
+Name=Adwaita-12
+Comment=Compact Adwaita pointer for fractional XWayland apps
+Inherits=Adwaita

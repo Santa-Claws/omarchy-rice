@@ -28,6 +28,8 @@ require("default.hypr.toggles")
 -- Add any other personal Hyprland configuration below.
 -- o.window("qemu", { workspace = "5" })
 
--- Keep the XWayland cursor proportional to Chromium's 0.7 UI scale.
-hl.env("XCURSOR_SIZE", "4")
-hl.env("HYPRCURSOR_SIZE", "4")
+-- Use a real 12px cursor theme; Adwaita's stock theme falls back to 24px.
+hl.env("XCURSOR_THEME", "Adwaita-12")
+hl.env("HYPRCURSOR_THEME", "Adwaita-12")
+hl.env("XCURSOR_SIZE", "12")
+hl.env("HYPRCURSOR_SIZE", "12")
