@@ -1,7 +1,16 @@
-model = "gpt-5.6-sol"
+model = "gpt-5.6-terra"
 model_reasoning_effort = "medium"
 notify = ["codex-completion-notify"]
 [projects."/home/tmac"]
+trust_level = "trusted"
+
+[projects."/home/tmac/Downloads/man-typer-main"]
+trust_level = "trusted"
+
+[projects."/home/tmac/aery-air"]
+trust_level = "trusted"
+
+[projects."/home/tmac/Downloads"]
 trust_level = "trusted"
 
 [tui]
@@ -10,3 +19,19 @@ notifications = false
 [tui.model_availability_nux]
 "gpt-5.5" = 1
 "gpt-5.6-sol" = 2
+
+# BEGIN ARTEMIS MCP CONFIG
+[mcp_servers.artemis]
+command = "/home/tmac/artemis/.venv/bin/python"
+args = ["-m", "mcp_server"]
+cwd = "/home/tmac/artemis"
+enabled = true
+required = true
+startup_timeout_sec = 120
+enabled_tools = ["mobile_run_task", "mobile_manage_task", "mobile_get_device_state", "mobile_inspect_trace", "mobile_diagnose"]
+
+[mcp_servers.artemis.env]
+PYTHONUNBUFFERED = "1"
+PYTHONPATH = "/home/tmac/artemis"
+ARTEMIS_DESKTOP_NOTIFY = "true"
+# END ARTEMIS MCP CONFIG

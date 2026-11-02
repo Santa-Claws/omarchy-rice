@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Build an exact-size Xcursor theme from an existing one. Chromium doubles
+# XWayland cursor assets under this fractional-scale setup, so a 6px source
+# yields the intended 12px cursor image.
+set -euo pipefail
+
+source_theme=${1:?source theme directory required}
+target_theme=${2:?target theme directory required}
+target_size=${3:?target size required}
+work_dir=$(mktemp -d)
+
+install -d "$target_theme/cursors"
+while IFS= read -r -d '' source_cursor; do
+  cursor_name=${source_cursor##*/}
+  extract_dir="$work_dir/$cursor_name"
+  install -d "$extract_dir"
+  xcur2png -d "$extract_dir" "$source_cursor" >/dev/null 2>&1 || continue
+  first_frame=$(find "$extract_dir" -maxdepth 1 -name '*.png' -print -quit)
+  [ -n "$first_frame" ] || continue
+  output_png="$work_dir/$cursor_name.png"
+  magick "$first_frame" -resize "${target_size}x${target_size}!" "$output_png"
+  hotspot_x=$((target_size / 4))
+  hotspot_y=0
+  printf '%s %s %s %s\n' "$target_size" "$hotspot_x" "$hotspot_y" "$output_png" > "$work_dir/$cursor_name.cfg"
+  xcursorgen "$work_dir/$cursor_name.cfg" "$target_theme/cursors/$cursor_name"
+done < <(find "$source_theme/cursors" -maxdepth 1 -type f -print0)
+
+printf '[Icon Theme]\nName=%s\nComment=Exact compact Xcursor assets for fractional XWayland scaling\nInherits=Adwaita\n' \
+  "$(basename "$target_theme")" > "$target_theme/index.theme"

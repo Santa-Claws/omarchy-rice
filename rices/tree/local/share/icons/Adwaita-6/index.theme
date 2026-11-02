@@ -1,0 +1,4 @@
+[Icon Theme]
+Name=Adwaita-6
+Comment=Exact compact Xcursor assets for fractional XWayland scaling
+Inherits=Adwaita

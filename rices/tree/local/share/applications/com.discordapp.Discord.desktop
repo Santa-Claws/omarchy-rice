@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Discord
-Exec=omarchy-launch-or-focus com.discordapp.Discord "flatpak run com.discordapp.Discord --force-device-scale-factor=0.7"
+Exec=omarchy-launch-or-focus com.discordapp.Discord "flatpak run com.discordapp.Discord " --force-device-scale-factor=0.7
 Icon=com.discordapp.Discord
 Terminal=false
 MimeType=x-scheme-handler/discord;

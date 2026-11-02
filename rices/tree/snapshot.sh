@@ -19,7 +19,8 @@ copy_directory() {
 }
 
 hypr_files=(
-  hyprland.conf hyprland.lua monitors.lua input.lua bindings.lua looknfeel.lua autostart.lua
+  hyprland.conf hyprland.lua monitors.conf input.conf bindings.conf looknfeel.conf autostart.conf
+  monitors.lua input.lua bindings.lua looknfeel.lua autostart.lua
   hypridle.conf hyprlock.conf hyprsunset.conf xdph.conf
 )
 
@@ -39,6 +40,8 @@ copy_directory "$HOME/.config/omarchy/plugins/tmac.notifications" \
 copy_file "$HOME/.config/mimeapps.list" "$RICE_DIR/config/mimeapps.list"
 copy_file "$HOME/.config/xdg-terminals.list" "$RICE_DIR/config/xdg-terminals.list"
 copy_file "$HOME/.config/chromium-flags.conf" "$RICE_DIR/config/chromium-flags.conf"
+copy_file "$HOME/.config/environment.d/90-compact-cursor.conf" \
+  "$RICE_DIR/config/environment.d/90-compact-cursor.conf"
 copy_file "$HOME/.config/omarchy-scaling-tui.json" "$RICE_DIR/config/omarchy-scaling-tui.json"
 copy_file "$HOME/.config/omarchy/shell.json" "$RICE_DIR/config/omarchy/shell.json"
 copy_file "$HOME/.config/omarchy/current/theme/waybar.css" \
@@ -54,6 +57,12 @@ copy_file "$HOME/.local/bin/omarchy-toggle-waybar" \
   "$RICE_DIR/local/bin/omarchy-toggle-waybar"
 copy_file "$HOME/.local/bin/omarchy-restart-waybar" \
   "$RICE_DIR/local/bin/omarchy-restart-waybar"
+copy_file "$HOME/.local/bin/build-compact-cursor-theme" \
+  "$RICE_DIR/local/bin/build-compact-cursor-theme"
+copy_file "$HOME/.icons/default/index.theme" \
+  "$RICE_DIR/icons/default/index.theme"
+copy_directory "$HOME/.local/share/icons/Adwaita-6" \
+  "$RICE_DIR/local/share/icons/Adwaita-6"
 
 desktop_files=(
   betaflight-configurator.desktop
