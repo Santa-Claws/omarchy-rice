@@ -11,7 +11,7 @@ hl.on("hyprland.start", function()
   )
   hl.exec_cmd("omarchy-scaling-tui --apply-discord-zoom 0.7")
   hl.exec_cmd(
-    "uwsm-app -- env XCURSOR_SIZE=6 HYPRCURSOR_SIZE=6 spotify --force-device-scale-factor=0.7",
+    "uwsm-app -- spotify --force-device-scale-factor=0.7",
     { workspace = "4 silent" }
   )
 end)
