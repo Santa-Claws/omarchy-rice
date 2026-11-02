@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+# Visual regression check for Chromium's private compact X11 cursor path.
+set -euo pipefail
+
+readonly launcher="$HOME/.local/bin/chromium-scaled"
+readonly pointer_source="$HOME/.local/bin/chromium-cursor-move.c"
+readonly pointer_helper="${XDG_CACHE_HOME:-$HOME/.cache}/chromium-cursor-move"
+readonly expected_dpr="0.70"
+readonly screen_width="$(hyprctl monitors -j | jq -r '.[0].width')"
+readonly screen_height="$(hyprctl monitors -j | jq -r '.[0].height')"
+test_root="$(mktemp -d /tmp/chromium-cursor-test.XXXXXX)"
+original_cursor="$(hyprctl cursorpos -j)"
+original_window="$(hyprctl activewindow -j | jq -r '.address // empty')"
+current_address=""
+failed=0
+
+cleanup() {
+  local exit_code=$?
+  if [[ -n $current_address ]]; then
+    hyprctl dispatch "hl.dsp.window.close({ window = \"address:$current_address\" })" >/dev/null 2>&1 || true
+  fi
+  if [[ -n $original_window ]]; then
+    hyprctl dispatch "hl.dsp.focus({ window = \"address:$original_window\" })" >/dev/null 2>&1 || true
+  fi
+  move_to "$(jq -r '.x | round' <<<"$original_cursor")" "$(jq -r '.y | round' <<<"$original_cursor")" >/dev/null 2>&1 || true
+  if (( exit_code == 0 )); then
+    find "$test_root" -depth -delete 2>/dev/null || true
+  else
+    printf 'Artifacts retained: %s\n' "$test_root" >&2
+  fi
+}
+trap cleanup EXIT
+
+require() { command -v "$1" >/dev/null || { echo "Missing required command: $1" >&2; exit 2; }; }
+for command in hyprctl jq grim magick cc; do require "$command"; done
+[[ -x $launcher ]] || { echo "Missing launcher: $launcher" >&2; exit 2; }
+[[ -f $pointer_source ]] || { echo "Missing pointer helper source: $pointer_source" >&2; exit 2; }
+install -d -m 700 "$(dirname "$pointer_helper")"
+if [[ ! -x $pointer_helper || $pointer_source -nt $pointer_helper ]]; then
+  cc -O2 -Wall -Wextra -o "$pointer_helper" "$pointer_source"
+fi
+
+move_to() {
+  local wanted_x=$1 wanted_y=$2 current_x current_y delta_x delta_y
+  for _ in {1..3}; do
+    current_x="$(hyprctl cursorpos -j | jq -r '.x | round')"
+    current_y="$(hyprctl cursorpos -j | jq -r '.y | round')"
+    delta_x=$((wanted_x - current_x))
+    delta_y=$((wanted_y - current_y))
+    "$pointer_helper" "$delta_x" "$delta_y"
+    sleep 0.25
+    current_x="$(hyprctl cursorpos -j | jq -r '.x | round')"
+    current_y="$(hyprctl cursorpos -j | jq -r '.y | round')"
+    # Relative virtual input is subject to Hyprland's pointer acceleration;
+    # stay inside the 96px capture crop while still proving real movement.
+    if (( ${current_x#-} - ${wanted_x#-} <= 12 && ${wanted_x#-} - ${current_x#-} <= 12 && ${current_y#-} - ${wanted_y#-} <= 12 && ${wanted_y#-} - ${current_y#-} <= 12 )); then
+      return 0
+    fi
+  done
+  echo "Pointer did not reach $wanted_x,$wanted_y (got $current_x,$current_y)" >&2
+  return 1
+}
+
+find_client() {
+  local pid=$1
+  hyprctl clients -j | jq -c --argjson pid "$pid" '.[] | select(.pid == $pid)' | head -n 1
+}
+
+run_shape() {
+  local shape=$1 limit_w=$2 limit_h=$3
+  local profile="$test_root/profile-$shape"
+  local html url client title address px py bx by bbox dims width height dpr inner
+  html="<!doctype html><title>starting</title><style>html,body{margin:0;width:100%;height:100%;background:#8b8b8b;cursor:$shape!important}</style><script>document.title='CURSOR_TEST_READY:$shape:dpr='+devicePixelRatio.toFixed(2)+':inner='+innerWidth+'x'+innerHeight</script>"
+  url="data:text/html,$(jq -rn --arg text "$html" '$text|@uri')"
+  "$launcher" --user-data-dir="$profile" --no-first-run --no-default-browser-check --disable-extensions --disable-background-networking --new-window "$url" >"$test_root/$shape.log" 2>&1 &
+  local browser_pid=$!
+  client=""
+  for _ in {1..80}; do
+    client="$(find_client "$browser_pid")"
+    if [[ -n $client ]] && jq -e '.title | startswith("CURSOR_TEST_READY:")' >/dev/null <<<"$client"; then break; fi
+    sleep 0.15
+  done
+  if [[ -z $client ]]; then
+    echo "$shape: Chromium test window did not become ready" >&2
+    failed=1
+    kill "$browser_pid" >/dev/null 2>&1 || true
+    return
+  fi
+  current_address="$(jq -r '.address' <<<"$client")"
+  title="$(jq -r '.title' <<<"$client")"
+  if [[ $(jq -r '.xwayland' <<<"$client") != true ]]; then
+    echo "$shape: expected XWayland client, got native Wayland" >&2
+    failed=1
+  fi
+  dpr="$(sed -n 's/.*:dpr=\([0-9.]*\):inner=.*/\1/p' <<<"$title")"
+  inner="$(sed -n 's/.*:inner=\([0-9]*\)x.*/\1/p' <<<"$title")"
+  if [[ $dpr != "$expected_dpr" || ! $inner =~ ^[0-9]+$ || $inner -lt 1100 ]]; then
+    echo "$shape: unexpected scale metrics: $title" >&2
+    failed=1
+  fi
+  px="$(jq -r '.at[0] + (.size[0] * 0.70) | round' <<<"$client")"
+  py="$(jq -r '.at[1] + (.size[1] * 0.72) | round' <<<"$client")"
+  bx=$((px + 100)); by=$py
+  if (( bx > screen_width - 16 )); then bx=$((px - 100)); fi
+  move_to "$bx" "$by" || failed=1
+  grim -c -s 1 -g "$((px-48)),$((py-48)) 96x96" "$test_root/$shape-base.png"
+  move_to "$px" "$py" || failed=1
+  grim -c -s 1 -g "$((px-48)),$((py-48)) 96x96" "$test_root/$shape-cursor.png"
+  bbox="$(magick "$test_root/$shape-base.png" "$test_root/$shape-cursor.png" -compose difference -composite -threshold 2% -trim -format '%@' info: 2>/dev/null || true)"
+  dims=${bbox%%+*}; width=${dims%x*}; height=${dims#*x}
+  if [[ ! $width =~ ^[0-9]+$ || ! $height =~ ^[0-9]+$ ]] || (( width > limit_w || height > limit_h )); then
+    echo "$shape: cursor bbox ${bbox:-none}; expected <= ${limit_w}x${limit_h}" >&2
+    failed=1
+  else
+    printf '%-8s %-11s dpr=%s inner=%s cursor=%sx%s\n' "$shape" "PASS" "$dpr" "$inner" "$width" "$height"
+  fi
+  hyprctl dispatch "hl.dsp.window.close({ window = \"address:$current_address\" })" >/dev/null 2>&1 || true
+  wait "$browser_pid" 2>/dev/null || true
+  current_address=""
+}
+
+echo "Chromium private cursor visual test"
+run_shape default 9 13
+run_shape pointer 12 16
+run_shape text 12 16
+
+if (( failed )); then
+  echo "FAIL: Chromium cursor visual test failed" >&2
+  exit 1
+fi
+echo "PASS: Chromium uses compact private cursors while retaining X11 0.7 scaling."

@@ -59,10 +59,18 @@ copy_file "$HOME/.local/bin/omarchy-restart-waybar" \
   "$RICE_DIR/local/bin/omarchy-restart-waybar"
 copy_file "$HOME/.local/bin/build-compact-cursor-theme" \
   "$RICE_DIR/local/bin/build-compact-cursor-theme"
+copy_file "$HOME/.local/bin/chromium-scaled" \
+  "$RICE_DIR/local/bin/chromium-scaled"
+copy_file "$HOME/.local/bin/test-chromium-cursor" \
+  "$RICE_DIR/local/bin/test-chromium-cursor"
+copy_file "$HOME/.local/bin/chromium-cursor-move.c" \
+  "$RICE_DIR/local/bin/chromium-cursor-move.c"
 copy_file "$HOME/.icons/default/index.theme" \
   "$RICE_DIR/icons/default/index.theme"
 copy_directory "$HOME/.local/share/icons/Adwaita-6" \
   "$RICE_DIR/local/share/icons/Adwaita-6"
+copy_directory "$HOME/.local/share/chromium-cursor" \
+  "$RICE_DIR/local/share/chromium-cursor"
 
 desktop_files=(
   betaflight-configurator.desktop

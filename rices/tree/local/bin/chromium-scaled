@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Keep Chromium's X11 cursor lookup private so its compact cursor does not
+# change Hyprland or any other application's cursor.
+set -euo pipefail
+
+export XCURSOR_PATH="$HOME/.local/share/chromium-cursor:$HOME/.local/share/icons:$HOME/.icons:/usr/share/icons:/usr/share/pixmaps:/usr/X11R6/lib/X11/icons"
+export XCURSOR_SIZE=12
+
+exec /usr/bin/chromium "$@"
