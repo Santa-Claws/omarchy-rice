@@ -1,4 +1,4 @@
 [Icon Theme]
 Name=default
-Comment=Use the compact cursor assets for applications that hard-code default
-Inherits=Adwaita-6
+Comment=Standard desktop cursor theme
+Inherits=Adwaita

@@ -4,7 +4,7 @@ Type=Application
 Name=Chromium
 GenericName=Web Browser
 Comment=Access the Internet
-Exec=env XCURSOR_THEME=default XCURSOR_SIZE=6 HYPRCURSOR_SIZE=6 /usr/bin/chromium --force-device-scale-factor=0.7 %U
+Exec=env XCURSOR_SIZE=4 HYPRCURSOR_SIZE=4 /usr/bin/chromium --force-device-scale-factor=0.7 %U
 Icon=chromium
 Terminal=false
 StartupNotify=true
@@ -14,8 +14,8 @@ Actions=new-window;new-private-window;
 
 [Desktop Action new-window]
 Name=New Window
-Exec=env XCURSOR_THEME=default XCURSOR_SIZE=6 HYPRCURSOR_SIZE=6 /usr/bin/chromium --force-device-scale-factor=0.7
+Exec=env XCURSOR_SIZE=4 HYPRCURSOR_SIZE=4 /usr/bin/chromium --force-device-scale-factor=0.7
 
 [Desktop Action new-private-window]
 Name=New Incognito Window
-Exec=env XCURSOR_THEME=default XCURSOR_SIZE=6 HYPRCURSOR_SIZE=6 /usr/bin/chromium --incognito --force-device-scale-factor=0.7
+Exec=env XCURSOR_SIZE=4 HYPRCURSOR_SIZE=4 /usr/bin/chromium --incognito --force-device-scale-factor=0.7
