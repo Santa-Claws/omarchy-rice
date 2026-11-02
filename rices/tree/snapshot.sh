@@ -50,6 +50,8 @@ copy_file "$HOME/.var/app/com.discordapp.Discord/config/discord-flags.conf" \
   "$RICE_DIR/var/app/com.discordapp.Discord/config/discord-flags.conf"
 copy_file "$HOME/.codex/AGENTS.md" "$RICE_DIR/codex/AGENTS.md"
 copy_file "$HOME/.codex/config.toml" "$RICE_DIR/codex/config.toml"
+copy_directory "$HOME/.codex/skills/mouse-debugging" \
+  "$RICE_DIR/codex/skills/mouse-debugging"
 
 copy_file "$HOME/.local/bin/codex-completion-notify" \
   "$RICE_DIR/local/bin/codex-completion-notify"

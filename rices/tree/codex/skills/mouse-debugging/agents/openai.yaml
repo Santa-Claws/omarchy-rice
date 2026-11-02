@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mouse Debugging"
+  short_description: "Diagnose Linux cursor size and rendering regressions."
+  default_prompt: "Use $mouse-debugging to diagnose and verify this Linux cursor or pointer-size issue."
