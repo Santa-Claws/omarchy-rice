@@ -79,6 +79,7 @@ desktop_files=(
   chromium.desktop
   com.discordapp.Discord.desktop
   com.orcaslicer.OrcaSlicer.desktop
+  expresslrs-configurator.desktop
   spotify.desktop
 )
 

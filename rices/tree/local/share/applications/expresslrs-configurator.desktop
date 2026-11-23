@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=ExpressLRS Configurator
+Exec="/opt/ExpressLRS Configurator/expresslrs-configurator" --no-sandbox --force-device-scale-factor=0.7 %U
+Terminal=false
+Type=Application
+Icon=expresslrs-configurator
+StartupWMClass=ExpressLRS Configurator
+Comment=Cross platform configuration tool for the ExpressLRS firmware
+Categories=Development;
