@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=CADDX PC Tool
+Comment=Configure and update Caddx/Walksnail devices
+Exec="/home/tmac/.local/opt/caddx-pc-tool-3.0.6/opt/CADDX PC Tool C/pc-tool-electron" --force-device-scale-factor=0.7 %U
+Icon=/home/tmac/.local/opt/caddx-pc-tool-3.0.6/usr/share/icons/hicolor/512x512/apps/pc-tool-electron.png
+Terminal=false
+Type=Application
+Categories=Utility;
+StartupWMClass=CADDX PC Tool C

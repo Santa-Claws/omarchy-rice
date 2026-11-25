@@ -76,6 +76,7 @@ copy_directory "$HOME/.local/share/chromium-cursor" \
 
 desktop_files=(
   betaflight-configurator.desktop
+  caddx-pc-tool.desktop
   chromium.desktop
   com.discordapp.Discord.desktop
   com.orcaslicer.OrcaSlicer.desktop
