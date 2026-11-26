@@ -121,6 +121,7 @@ hl.unbind("SUPER + CTRL + T")
 hl.unbind("SUPER + CTRL + W")
 o.bind("SUPER + CTRL + T", "Theme menu", "omarchy-menu toggle theme")
 o.bind("SUPER + CTRL + W", "Background menu", "omarchy-menu toggle background")
+o.bind("SUPER + CTRL + G", "Network", "omarchy-shell shell toggle omarchy.network")
 
 -- Reset display zoom.
 o.bind("SUPER + SHIFT + Z", "Reset zoom", function()
